@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>jogo da cobra gorda</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
+    <style>
+        body {
+            /* Aplica a imagem fundoCobra.jpg como fundo */
+            background: url('fundoCobra.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            /* Torna o texto padrão branco para aparecer no fundo escuro */
+        }
+
+        #bg,
+        #overlay {
+            display: none !important;
+            /* Esconde os overlays antigos */
+        }
+
+        #nome-jogador-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2em;
+        }
+
+        #nome-jogador-form input {
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            border: 1px solid #198754;
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+            color: #222;
+            /* Letras pretas no input */
+            background: #fff;
+            /* Fundo branco no input */
+        }
+
+        #nome-jogador-form button {
+            padding: 0.5em 2em;
+            border-radius: 8px;
+            border: none;
+            background: #198754;
+            color: #fff;
+            /* Letras brancas no botão */
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Garante que links e botões fiquem visíveis */
+        a.button {
+            color: #fff !important;
+        }
+    </style>
+</head>
+
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="bg"></div>
+        <div id="overlay"></div>
+        <div id="main">
+            <header id="header">
+                <h1>Cobra Gulosa</h1>
+                <p>a cobra vai fumar e comer maças até ficar maior que o brasil</p>
+                <!-- Formulário para nome do jogador -->
+                <form id="nome-jogador-form" autocomplete="off" onsubmit="return false;">
+                    <input type="text" id="nome-jogador" placeholder="Digite seu nome" maxlength="20" required>
+                    <button type="button" onclick="registrarNome()">Registrar Nome</button>
+                </form>
+                <!-- Botão JOGAR -->
+                <a href="cobraGulosa.html" class="button" id="btn-jogar"
+                    style="margin-top: 2em; display: inline-block; padding: 2em 4em; background: #198754; color: #fff; border-radius: 12px; text-decoration: none; font-size: 2em; font-weight: bold;">
+                    JOGAR
+                </a>
+                <a href="Ranking.html" class="button"
+                    style="margin-top: 2em; display: inline-block; padding: 2em 4em; background: #198754; color: #fff; border-radius: 12px; text-decoration: none; font-size: 2em; font-weight: bold;">
+                    RANKING
+                </a>
+            </header>
+            <footer id="footer">
+                <span class="copyright">Feito por Jardson e Vicente</span>
+            </footer>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            document.body.classList.remove('is-preload');
+            // Bloqueia o botão JOGAR se não houver nome registrado
+            document.getElementById('btn-jogar').addEventListener("click", function (e) {
+                let nome = localStorage.getItem('nomeJogadorCobra');
+                if (!nome) {
+                    e.preventDefault();
+                    alert('Por favor, registre seu nome antes de jogar!');
+                }
+            });
+        }
+        window.ontouchmove = function () { return false; }
+        window.onorientationchange = function () { document.body.scrollTop = 0; }
+        // Função para registrar o nome no localStorage
+        function registrarNome() {
+            const nome = document.getElementById('nome-jogador').value.trim();
+            if (nome.length > 0) {
+                localStorage.setItem('nomeJogadorCobra', nome);
+                alert('Nome registrado! Agora clique em JOGAR.');
+            } else {
+                alert('Digite um nome válido.');
+            }
+        }
+    </script>
+</body>
+
+</html>
